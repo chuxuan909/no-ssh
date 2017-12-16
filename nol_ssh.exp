@@ -1,0 +1,16 @@
+#!/usr/bin/expect
+##Author: Chenjie########################
+##gitLab: https://gitlab.com/chuxuan909##
+##发送公钥的exp脚本######################
+##ip地址和密码可从sh脚本传递#############
+set ip_addr  [lindex $argv 0]
+set passwd  [lindex $argv 1]
+##传递公钥############################
+spawn ssh-copy-id $ip_addr
+expect {
+"yes/no"  {send "yes\r";exp_continue}
+"password:"  {send "$passwd\r"}
+eof
+"password"  {send "$passwd\r"}
+        }
+expect eof

@@ -1,0 +1,13 @@
+#!/usr/bin/expect
+##Author: Chenjie###############################
+##gitLab: https://gitlab.com/chuxuan909/no-ssh##
+##发送私钥的exp脚本#############################
+##ip地址和密码可从sh脚本传递####################
+set ip_addr  [lindex $argv 0]
+##传递私钥############################
+spawn ssh  root@$ip_addr
+expect "*from*"
+send "chmod 600 /root/.ssh/id_rsa\r"
+expect "]#"
+send "exit\r"
+expect eof
