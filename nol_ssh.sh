@@ -8,6 +8,8 @@
 PASS_FILE=ip_passwd_example.txt
 USER_N=root
 USER_HOME=/root
+###安装saltstack的master服务端ip地址#
+HOST_IP=10.27.95.184
 ########检验是否生成秘钥对############
 [ ! $(ls /root/.ssh|grep id_rsa*|wc -l) -ne 0 ] && echo -e "\e[0;31mPlease generate the key pair: use the command ssh-keygen-t rsa\e[0m" && exit 9
 ########使用密码文件的信息传递公钥##
@@ -17,8 +19,11 @@ do
 j=$(awk -v I="$i" '{if(I=$i)  print $2}'  $PASS_FILE)
 expect nol_ssh.exp $i  $j
 #########传递私钥到集群主机#################
-scp /root/.ssh/id_rsa root@$i:/root/.ssh/
+#scp /root/.ssh/id_rsa root@$i:/root/.ssh/
 ##修改私钥为600权限的脚本####
-expect nol_ssh_prv.exp $i 
+#expect nol_ssh_prv.exp $i 
+############################################
+#########在集群服务器上安装saltstack客户端##
+#expect nol_ssh_fun.exp $i $HOST_IP
 ############################################
 done

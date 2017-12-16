@@ -1,0 +1,18 @@
+#!/usr/bin/expect
+##Author: Chenjie###############################
+##gitLab: https://gitlab.com/chuxuan909/no-ssh##
+##发送私钥的exp脚本#############################
+##ip地址和密码可从sh脚本传递####################
+set ip_addr  [lindex $argv 0]
+set host_ip  [lindex $argv 1]
+##传递公钥############################
+spawn ssh  root@$ip_addr
+expect "]#"
+send "yum -y install salt-minion\r"
+expect "]#"
+send "sed -i '17i master: $host_ip' /etc/salt/minion\r"
+expect "]#"
+send "/etc/init.d/salt-minion start\r"
+expect "]#"
+send "exit\r" 
+expect eof
