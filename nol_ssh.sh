@@ -10,6 +10,8 @@ USER_N=root
 USER_HOME=/root
 ###安装saltstack的master服务端ip地址#
 HOST_IP=10.27.95.184
+#USE_IFCONFIG=eth0
+#HOST_IP=$(ifconfig $USE_IFCONFIG | grep "inet addr" | awk '{ print $2}' | awk -F: '{print $2}')
 ########检验是否生成秘钥对############
 [ ! $(ls /root/.ssh|grep id_rsa*|wc -l) -ne 0 ] && echo -e "\e[0;31mPlease generate the key pair: use the command ssh-keygen-t rsa\e[0m" && exit 9
 ########使用密码文件的信息传递公钥##
