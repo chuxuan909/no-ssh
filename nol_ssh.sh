@@ -22,10 +22,10 @@ j=$(awk -v I="$i" '{if(I=$i)  print $2}'  $PASS_FILE)
 expect nol_ssh.exp $i  $j
 #########传递私钥到集群主机#################
 #scp /root/.ssh/id_rsa root@$i:/root/.ssh/
-##修改私钥为600权限的脚本####
+##修改私钥为600权限的脚本##################
 #expect nol_ssh_prv.exp $i 
 ############################################
-#########在集群服务器上安装saltstack客户端##
+#########在集群服务器上安装saltstack客户端#
 #expect nol_ssh_fun.exp $i $HOST_IP
 ############################################
 done
