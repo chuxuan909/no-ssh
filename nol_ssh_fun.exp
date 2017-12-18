@@ -9,10 +9,10 @@ set host_ip  [lindex $argv 1]
 spawn ssh  root@$ip_addr
 expect "]#"
 send "yum -y install salt-minion\r"
-expect "]#"
-send "sed -i '17i master: $host_ip' /etc/salt/minion\r"
+expect "Complete!"
+send "sed -i '16s/^.*/master: $host_ip/' /etc/salt/minion\r"
 expect "]#"
 send "/etc/init.d/salt-minion start\r"
-expect "]#"
+expect "Starting salt-minion daemon:"
 send "exit\r" 
 expect eof
